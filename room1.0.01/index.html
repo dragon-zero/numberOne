@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>积云选房系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<!-- <link rel="stylesheet" href="static/css/sm.min.css" charset='utf-8'> -->
+<link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+<link rel="stylesheet" href="static/css/main.css">
+<!-- <link rel="stylesheet" href="static/css/font-awesome.css"> -->
+
+</head>
+<body>
+
+
+  <div class="page-group">
+    <!-- ------------------------------主页-------------------------------- -->
+    <div class="page " id="main-page">
+        <header class="bar bar-nav">
+            <a class="icon icon-me pull-left open-panel"></a>
+            <h1 class="title">积云招待处</h1>
+        </header>
+
+        <div class="content close-panel">
+            <!-- 这里是页面内容区 -->
+           <div class="content-block">
+                <p id="time-tip">请选择预定的床位</p>
+                <div class="time-input">
+                    入住时间：
+                    <input type="date" id='datetime-picker-checkin'/>
+                </div>
+                <div class="time-input">
+                    退房时间：
+                    <input type="date" id='datetime-picker-checkout'/>
+                </div>
+           </div>
+
+            <div class="content-block" id="rooms_list"></div>
+
+            <div class="content-block">
+            <div class="row">
+                <div class="col-100">
+                  <a href="#" class="button button-light button-big button-fill" id="showmore" style="display:none;">显示更多</a></div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                    <div class="col-100"><a href="#" class="button button-big button-fill"  id="submitbtn">查询可用房间</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+     <!-- ------------------------------订单页-------------------------------- -->
+    <div class="page" id="order_page">
+            <header class="bar bar-nav">
+                <a class="icon icon-left pull-left back"></a>
+                <h1 class="title">订单页</h1>
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="create-order-list"></ul>
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">押金</div>
+                            <div class="item-after" id="deposit">￥50</div>
+                        </div>
+                        </li>
+                        <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">总金额</div>
+                            <div class="item-after" id="total">￥110</div>
+                        </div>
+                        </li>
+                        <li class="item-content">
+                        <div class="item-inner">
+                            <div class="item-title">订单号</div>
+                            <div class="item-after" id="order_sn"></div>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block" style="text-align:center">
+                    <p>请在<span class="remain-time">2分钟</span>内付款，否则订单自动取消</p>
+                    <div class="row">
+                        <div class="col-100"><a href="#" class="button button-big button-fill" id="paybtn">支付</a></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+     <!-- ------------------------------登录页-------------------------------- -->
+    <div class="page  page-current" id="login-page">
+
+
+        <div class="logo-content">
+        <img src="static/img/jylogo.png" class="logo" alt="">
+        </div>
+
+        <div class="list-block">
+            <ul>
+                <!-- Text inputs -->
+                <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-name"></i></div>
+                    <div class="item-inner">
+                    <div class="item-title label">姓名</div>
+                    <div class="item-input">
+                        <input type="text" placeholder="请输入您的用户名" id="username">
+                    </div>
+                    </div>
+                </div>
+                </li>
+
+                <li>
+                <div class="item-content">
+                    <div class="item-media"><i class="icon icon-form-password"></i></div>
+                    <div class="item-inner">
+                    <div class="item-title label">密码</div>
+                    <div class="item-input">
+                        <input type="password" placeholder="请输入您的密码" id="password">
+                    </div>
+                    </div>
+                </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+        <div class="row">
+            <div class="col-100"><a href="#" class="button button-big button-fill" id="loginbtn">登录</a></div>
+        </div>
+        </div>
+    </div>
+
+
+     <!-- ------------------------------支付popup页-------------------------------- -->
+    <div class="popup popup-pay">
+        <div class="content-block">
+            <p>选择支付方式</p>
+            <p><a href="#" class="close-popup"> 取消</a></p>
+            <div class="list-block inset">
+                <ul>
+                    <li><a href="#" class="item-link list-button">
+                         <!-- <img src="static/img/wechat.png" class="pay-icon" alt="">  -->
+                         微信</a></li>
+                    <li><a href="#" class="item-link list-button">
+                        <!-- <img src="static/img/alipay.png" class="pay-icon" alt=""> -->
+                        支付宝</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ------------------------------用户所有订单页-------------------------------- -->
+    <div class="popup" id="person_order_page" style="background:#eee;">
+        <header class="bar bar-nav">
+            <a class="icon icon-left pull-left close-popup"></a>
+            <h1 class="title">单页</h1>
+        </header>
+
+        <div class="content content-block" id="person-order-list" style="top:36px;margin-top:0;"></div>
+    </div>
+</div>
+
+
+
+<!-- ------------------------------个人中心页------------------------------ -->
+<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+
+        <div class="avatar">
+            <img src="static/img/ava.jpeg" alt="">
+        </div>
+        <div class="list-block person">
+        <ul>
+            <li class="item-content item-link">
+            <div class="item-inner">
+                <span class="icon icon-app"></span>
+                <a class="item-title" id="to_person_order">订单</a>
+            </div>
+            </li>
+        </ul>
+        </div>
+
+
+        <p><a href="#" class="close-panel">关闭</a></p>
+    </div>
+</div>
+
+
+
+
+
+<script id="room_item" type="text/html">
+
+        <%for(var i = 0;i <rooms.length;i++ ){%>
+            <div class="card">
+                <div class="card-header"><%=rooms[i].room_name%></div>
+                <div class="card-content">
+                    <div class="card-content-inner">
+                        <div class="row">
+                                <%for(var j = 0;j < rooms[i].beds.length;j++ ){%>
+                                <div class="col-100">
+                                    <div class='checkbox'>
+                                        <input type='checkbox' id="<%=rooms[i].beds[j].bed_id%>" name='checkboox'>
+                                        <label for='<%=rooms[i].beds[j].bed_id%>'> <%=rooms[i].beds[j].bed_name%> <span class="currency">￥<%=(rooms[i].beds[j].price/100).toFixed(2)%></span>  </label>
+                                    </div>
+                                </div>
+                                <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+</script>
+
+<script id="create-order-list-temp" type="text/html">
+
+<%for(var i = 0; i < beds.length;i++){%>
+    <li class="item-content">
+        <div class="item-inner">
+            <div class="item-title"><%=beds[i].bed_name%></div>
+            <div class="item-title"><%=beds[i].day%></div>
+            <div class="item-after">￥30</div>
+        </div>
+    </li>
+<%}%>
+
+</script>
+
+<script id="person-order-list-temp" type="text/html">
+
+    <%for(var i = 0;i < info.ordres.length;i++){%>
+        <div class="list-block">
+            <ul>
+                <%for(var j = 0;j < info.ordres[i].beds.length;j++){%>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title"><%=info.ordres[i].beds[j].bed_name%></div>
+                        <div class="item-title"><%=info.ordres[i].beds[j].day%></div>
+                        <div class="item-after">￥<%=(info.ordres[i].beds[j].price/100).toFixed(2)%></div>
+                    </div>
+                </li>
+                <%}%>
+            </ul>
+            <ul>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">入住时间</div>
+                    <div class="item-after deposit"><%=info.ordres[i].check_in%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">退房时间</div>
+                    <div class="item-after deposit"><%=info.ordres[i].check_out%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">押金</div>
+                    <div class="item-after deposit">￥<%=(info.ordres[i].deposit/100).toFixed(2)%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">总金额</div>
+                    <div class="item-after total">￥<%=(info.ordres[i].total/100).toFixed(2)%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">订单号</div>
+                    <div class="item-after order_sn"><%=info.ordres[i].order_sn%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">创建订单时间</div>
+                    <div class="item-after order_sn"><%=info.ordres[i].create_time%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">订单状态</div>
+                    <div class="item-after order_sn"><%=info.ordres[i].status%></div>
+                </div>
+                </li>
+                <li class="item-content">
+                <div class="item-inner">
+                    <div class="item-title">退房</div>
+                    <div class="item-after order_sn"><a href="#" class="tuifang" onclick="tuifang(<%=info.ordres[i].order_sn%>,<%=info.ordres[i].beds%>)" class="button button-danger">退房</a></div>
+                </div>
+                </li>
+            </ul>
+        </div>
+    <%}%>
+
+</script>
+
+  <script type='text/javascript' src="static/js/template-web.js"></script>
+  <!-- <script type='text/javascript' src='static/js/zepto.js' charset='utf-8'></script> -->
+  <script type='text/javascript' src='static/js/utils.js' charset='utf-8'></script>
+  <!-- <script type='text/javascript' src='static/js/sm.min.js' charset='utf-8'></script> -->
+  <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+  <script type='text/javascript' src='//g.alicdn.com/msui/sm/0.6.2/js/sm.min.js' charset='utf-8'></script>
+  <script src="static/js/index.js"></script>
+</body>
+</html>

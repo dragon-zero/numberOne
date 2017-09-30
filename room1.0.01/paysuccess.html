@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<h1>支付成功</h1>
+
+<div class="">
+    <span id="time" style="color:red;">5</span>秒后自动跳转回主页...
+</div>
+<script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
+<script type="text/javascript">
+
+var time = 5;
+var timer = setInterval(function(){
+
+    if(time > 0){
+      time--;
+      $("#time").html(time)
+    }else {
+      clearInterval(timer)
+      window.location.href = 'http://pay.usian.cn/';
+    }
+},1000)
+
+</script>
+</body>
+</html>
